@@ -11,7 +11,7 @@ Follow these steps to run the project locally:
 ### 1. Clone the Repository
 
 ```cmd
-git clone https://github.com/your-username/vitalis.git
+git clone https://github.com/your-foldername/vitalis.git
 cd vitalis
 ```
 
@@ -19,9 +19,9 @@ cd vitalis
 To check
 ```cmd
 node --version
-
-if not then install it 
 ```
+if not then install it 
+
 ### 3. Install the local dependencies or modules
 
 ```cmd
