@@ -9,7 +9,7 @@ const Loader = () => {
       <motion.img
         src={logo}
         alt="Loading..."
-        className="w-16 h-16"
+        className="w-16 h-16 rounded-full border-2 border-green-500"
         initial={{ scale: 0 }}
         animate={{ scale: [0, 1.2, 1] }}
         transition={{ duration: 0.6, ease: 'easeInOut' }}

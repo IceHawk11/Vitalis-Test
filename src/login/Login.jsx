@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { motion } from 'framer-motion';
 import logo from '../assets/icon.png'; 
 
 const Login = () => {
@@ -21,6 +22,7 @@ const Login = () => {
       (user) => user.username === username && user.password === password
     );
     if (validUser) {
+      localStorage.setItem('username', username);
       navigate('/dashboard');
     } else {
       alert('Invalid credentials');
@@ -33,9 +35,19 @@ const Login = () => {
         onSubmit={handleLogin}
         className="w-full max-w-sm bg-[#112e1a] p-8 rounded-xl shadow-lg space-y-6"
       >
-        {/* ✅ Logo on top */}
+        {/* ✅ Logo with framer hover + click to home */}
         <div className="flex justify-center mb-2">
-          <img src={logo} alt="Vitalis Logo" className="h-12 w-12 rounded-full shadow-md" />
+          <motion.img
+            src={logo}
+            alt="Vitalis Logo"
+            className="h-12 w-12 rounded-full border border-green-500 shadow-md cursor-pointer"
+            whileHover={{
+              scale: 1.15,
+              boxShadow: '0 0 12px rgba(34,197,94,0.7)',
+            }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={() => navigate('/')}
+          />
         </div>
 
         <h2 className="text-3xl font-bold text-center text-green-400">Welcome Back</h2>

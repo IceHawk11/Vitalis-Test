@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-            <img src={logo} alt="Vitalis Logo" className="w-6 h-6 rounded-full" />
+            <img src={logo} alt="Vitalis Logo" className="w-6 h-6 rounded-full border border-green-500" />
             <span className="font-semibold">Vitalis</span>
             </div>
             <p className="text-muted-foreground">
