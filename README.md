@@ -13,13 +13,22 @@ Follow these steps to run the project locally:
 ```cmd
 git clone https://github.com/your-username/vitalis.git
 cd vitalis
+```
 
-### 2. Install all the dependencies required to run locally
+### 2. Make sure node.js is installed in your machine
+To check
+```cmd
+node --version
+
+if not then install it 
+```
+### 3. Install the local dependencies or modules
 
 ```cmd
 npm install
-
-### 3. Run the server and a webpage will appear
+```
+### 4. Start the server and a webpage will appear
 
 ```cmd
 npm start
+```
