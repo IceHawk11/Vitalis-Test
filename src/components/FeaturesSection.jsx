@@ -10,7 +10,7 @@ const features = [
   {
     icon: <BarChart2 className="w-10 h-10 text-primary" />,
     title: "Data Analytics",
-    description: "Gain insights through powerful analytics and personalized reports."
+    description: "Gain insights through powerful analytics and personalized reports on crops."
   },
   {
     icon: <Clock className="w-10 h-10 text-primary" />,
