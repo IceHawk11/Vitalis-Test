@@ -1,11 +1,18 @@
 import logo from '../assets/icon.png';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { motion } from 'framer-motion';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSignupClick = () => {
+    navigate('/signup');
+    setIsOpen(false); // close menu if mobile
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -31,10 +38,10 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button>Sign up</Button>
+          <Button onClick={handleSignupClick}>Sign up</Button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Toggle */}
         <button 
           className="md:hidden" 
           onClick={() => setIsOpen(!isOpen)}
@@ -50,7 +57,7 @@ const Header = () => {
             <a href="#features" className="text-lg font-medium hover:text-primary" onClick={() => setIsOpen(false)}>Features</a>
             <a href="#about" className="text-lg font-medium hover:text-primary" onClick={() => setIsOpen(false)}>About</a>
             <div className="pt-6 flex flex-col gap-4">
-              <Button className="w-full">Sign up</Button>
+              <Button className="w-full" onClick={handleSignupClick}>Sign up</Button>
             </div>
           </nav>
         </div>
