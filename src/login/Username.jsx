@@ -8,10 +8,13 @@ const Username = () => {
   const [username, setUsername] = useState('');
   const [mobile, setMobile] = useState('');
 
+  const validUsernames = ['Rimi', 'IceHawk', 'Yash', 'vitalis'];
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (username.trim()) {
-      if (username === 'user123') {
+      if (validUsernames.includes(username)) {
         localStorage.setItem('username', username);
         navigate('/login/passwd');
       } else {
@@ -34,7 +37,6 @@ const Username = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-900 to-green-700 flex items-center justify-center">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
-          {/* Clickable logo */}
           <img
             src={logo}
             alt="Vitalis Logo"
@@ -46,6 +48,7 @@ const Username = () => {
             Login with either Username or Mobile Number
           </p>
         </div>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -70,7 +73,6 @@ const Username = () => {
           </button>
         </form>
 
-        {/* Sign Up link */}
         <p className="text-sm text-center mt-4 text-gray-600">
           Create New Account?{' '}
           <span
