@@ -1,6 +1,7 @@
 # 🌾 Vitalis
 
 **Smart Sustainable Agricultural Monitoring & Management Hub**
+**Live Uptime Dashboard** - https://vitalis.cronitorstatus.com/
 
 ---
 
