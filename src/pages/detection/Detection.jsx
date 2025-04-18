@@ -1,10 +1,10 @@
-// src/pages/detection/Detection.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MoreVertical, User, LogOut, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import logo from '../../assets/icon.png';
 import DashboardFooter from '../../pages/Dashboard_Footer';
+import { useTranslation } from 'react-i18next';
 
 const Detection = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +15,7 @@ const Detection = () => {
   const [imageCount, setImageCount] = useState(0);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const user = localStorage.getItem('username');
@@ -68,43 +69,31 @@ const Detection = () => {
     }, 2000);
   };
 
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
   const getDiseaseInfo = () => {
     const diseases = [
       {
-        severity: 'Moderate Severity',
+        severity: t('moderateSeverity'),
         confidence: '75% confidence',
         disease: 'Moderate Blight',
-        symptoms: [
-          'Scattered yellow-brown lesions',
-          'Light wilting of leaves',
-          'Some curling at edges',
-          'Minimal stem damage'
-        ],
+        symptoms: [t('symptom1'), t('symptom2'), t('symptom3'), t('symptom4')],
       },
       {
-        severity: 'Medium Severity',
+        severity: t('mediumSeverity'),
         confidence: '85% confidence',
         disease: 'Early Blight',
-        symptoms: [
-          'Concentric rings on older leaves',
-          'Yellowing around spots',
-          'Leaf drop starting from bottom',
-          'Dark patches on fruit shoulders'
-        ],
+        symptoms: [t('symptom5'), t('symptom6'), t('symptom7'), t('symptom8')],
       },
       {
-        severity: 'High Severity',
+        severity: t('highSeverity'),
         confidence: '90% confidence',
         disease: 'Late Blight',
-        symptoms: [
-          'Large, dark brown patches on leaves',
-          'White fuzzy growth on undersides',
-          'Rapid wilting and death of foliage',
-          'Brown lesions on stems and fruit'
-        ],
+        symptoms: [t('symptom9'), t('symptom10'), t('symptom11'), t('symptom12')],
       },
     ];
-
     return diseases[imageCount];
   };
 
@@ -121,30 +110,45 @@ const Detection = () => {
           />
           <span className="text-lg sm:text-xl font-semibold text-green-700">Vitalis</span>
         </div>
-        <div className="flex items-center space-x-2 text-green-700 font-medium relative">
-          <span className="hidden sm:inline">{username}</span>
-          <button onClick={() => setShowDropdown(!showDropdown)}>
-            <MoreVertical size={20} />
-          </button>
-          {showDropdown && (
-            <div
-              ref={dropdownRef}
-              className="absolute right-0 top-12 mt-2 w-40 bg-white rounded-md shadow-lg border z-50"
-            >
-              <button
-                onClick={handleProfile}
-                className="flex items-center gap-2 px-4 py-2 w-full text-sm hover:bg-gray-100"
+
+        <div className="flex items-center gap-4">
+          {/* Language dropdown */}
+          <select
+            value={i18n.language}
+            onChange={(e) => changeLanguage(e.target.value)}
+            className="bg-green-600 text-white text-sm font-medium px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="kn">ಕನ್ನಡ</option>
+          </select>
+
+          <div className="flex items-center space-x-2 text-green-700 font-medium relative">
+            <span className="hidden sm:inline">{username}</span>
+            <button onClick={() => setShowDropdown(!showDropdown)}>
+              <MoreVertical size={20} />
+            </button>
+            {showDropdown && (
+              <div
+                ref={dropdownRef}
+                className="absolute right-0 top-12 mt-2 w-40 bg-white rounded-md shadow-lg border z-50"
               >
-                <User size={16} /> Profile
-              </button>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 w-full text-sm text-red-600 hover:bg-gray-100"
-              >
-                <LogOut size={16} /> Logout
-              </button>
-            </div>
-          )}
+                <button
+                  onClick={handleProfile}
+                  className="flex items-center gap-2 px-4 py-2 w-full text-sm hover:bg-gray-100"
+                >
+                  <User size={16} /> {t('profile')}
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 px-4 py-2 w-full text-sm text-red-600 hover:bg-gray-100"
+                >
+                  <LogOut size={16} /> {t('logout')}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -152,10 +156,9 @@ const Detection = () => {
       <div className="flex flex-1 justify-center py-6 px-4 sm:px-6">
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 max-w-4xl w-full">
           <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">
-            Tomato Plant Disease Analysis
+            {t('detectionTitle')}
           </h1>
 
-          {/* Image Preview */}
           <div className="flex justify-center mb-6 relative">
             {selectedImage ? (
               <div className="relative w-full max-w-xs">
@@ -173,16 +176,15 @@ const Detection = () => {
               </div>
             ) : (
               <div className="w-full max-w-xs h-56 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md text-gray-400 text-sm">
-                No image selected
+                {t('noImage')}
               </div>
             )}
           </div>
 
-          {/* Upload Button */}
           <div className="flex justify-center mb-6">
             <label htmlFor="imageUpload">
               <span className="bg-green-600 text-white px-5 py-2 rounded-md font-medium cursor-pointer hover:bg-green-700 text-sm sm:text-base">
-                Upload Image
+                {t('uploadImage')}
               </span>
               <input
                 type="file"
@@ -194,19 +196,17 @@ const Detection = () => {
             </label>
           </div>
 
-          {/* Analyze Button */}
           {selectedImage && !analysisComplete && !isAnalyzing && (
             <div className="flex justify-center mb-6">
               <button
                 onClick={handleAnalyze}
                 className="bg-blue-600 text-white px-5 py-2 rounded-md font-medium hover:bg-blue-700"
               >
-                Analyze
+                {t('analyze')}
               </button>
             </div>
           )}
 
-          {/* Loader */}
           {isAnalyzing && (
             <div className="flex flex-col items-center justify-center mb-6">
               <div className="flex space-x-2">
@@ -223,11 +223,12 @@ const Detection = () => {
                   />
                 ))}
               </div>
-              <p className="mt-3 text-blue-600 font-medium text-sm sm:text-base">Analyzing...</p>
+              <p className="mt-3 text-blue-600 font-medium text-sm sm:text-base">
+                {t('analyzing')}
+              </p>
             </div>
           )}
 
-          {/* Analysis Result */}
           {analysisComplete && (
             <div className="bg-gray-50 border-l-4 border-red-500 rounded-md p-4 sm:p-6 shadow text-sm sm:text-base">
               <div className="flex justify-between items-center mb-2">
@@ -235,9 +236,10 @@ const Detection = () => {
                 <span className="text-xs text-gray-500">{getDiseaseInfo().confidence}</span>
               </div>
               <p className="font-semibold text-gray-700 mb-2">
-                Detected Disease: <span className="text-red-600">{getDiseaseInfo().disease}</span>
+                {t('detectedDisease')}{' '}
+                <span className="text-red-600">{getDiseaseInfo().disease}</span>
               </p>
-              <p className="font-medium text-gray-700 mb-1">Symptoms:</p>
+              <p className="font-medium text-gray-700 mb-1">{t('symptoms')}:</p>
               <ul className="list-disc list-inside text-gray-600 space-y-1">
                 {getDiseaseInfo().symptoms.map((symptom, idx) => (
                   <li key={idx}>{symptom}</li>

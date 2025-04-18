@@ -7,6 +7,7 @@ import FeaturesSection from './components/FeaturesSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import PageTransitionWrapper from './components/PageTransitionWrapper';
+import './i18n/i18n';
 
 import Detection from './pages/detection/Detection';
 import Username from './login/Username';

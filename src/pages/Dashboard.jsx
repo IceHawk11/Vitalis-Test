@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import logo from '../assets/icon.png';
 import DashboardFooter from './Dashboard_Footer';
+import { useTranslation } from 'react-i18next';
 
 const cities = [
   { name: 'Delhi', lat: 28.6667, lon: 77.2167 },
@@ -24,6 +25,7 @@ const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const user = localStorage.getItem('username');
@@ -73,38 +75,48 @@ const Dashboard = () => {
   };
 
   const getWeatherSummary = () => {
-    if (!weather) return '';
+    if (!weather) {
+      return {
+        title: t('weather_summary.loading_title'),
+        desc: t('weather_summary.loading_desc')
+      };
+    }
     const temp = weather.main.temp;
     const humidity = weather.main.humidity;
     const wind = weather.wind.speed;
 
     if (temp >= 20 && temp <= 30 && humidity <= 70 && wind < 15) {
       return {
-        title: 'Mild & Pleasant',
-        desc: 'Current conditions indicate a mild climate with moderate humidity and gentle winds, perfect for outdoor activities and plant growth.'
+        title: t('weather_summary.mild_title'),
+        desc: t('weather_summary.mild_desc')
       };
     }
     return {
-      title: 'Variable Conditions',
-      desc: 'The weather conditions are changing. Please monitor regularly for optimal farming decisions.'
+      title: t('weather_summary.variable_title'),
+      desc: t('weather_summary.variable_desc')
     };
   };
 
   const getSoilSummary = () => {
-    if (!soil) return '';
+    if (!soil) {
+      return {
+        title: t('soil_summary.loading_title'),
+        desc: t('soil_summary.loading_desc')
+      };
+    }
     const moisture = soil.soilm_0_10cm;
     const evap = soil.evapotranspiration;
     const precip = soil.precip;
 
     if (moisture > 20 && evap < 6 && precip > 1) {
       return {
-        title: 'Optimal Condition',
-        desc: 'Soil moisture and nutrient levels are within the ideal range. The soil structure is well-maintained and suitable for healthy plant growth.'
+        title: t('soil_summary.optimal_title'),
+        desc: t('soil_summary.optimal_desc')
       };
     }
     return {
-      title: 'Needs Attention',
-      desc: 'Soil health indicators suggest potential issues. Consider checking irrigation and nutrient supply.'
+      title: t('soil_summary.attention_title'),
+      desc: t('soil_summary.attention_desc')
     };
   };
 
@@ -123,7 +135,20 @@ const Dashboard = () => {
           />
           <span className="text-lg sm:text-xl font-semibold text-green-700">Vitalis</span>
         </div>
-        <div className="flex items-center space-x-2 text-green-700 font-medium relative">
+        <div className="flex items-center space-x-4 text-green-700 font-medium relative">
+        <div className="relative">
+  <select
+    value={i18n.language}
+    onChange={(e) => i18n.changeLanguage(e.target.value)}
+    className="bg-green-600 text-white font-medium text-sm px-3 py-1 rounded-md shadow-sm border-none focus:outline-none focus:ring-2 focus:ring-green-400"
+  >
+    <option value="en" className="text-black bg-white">English</option>
+    <option value="hi" className="text-black bg-white">हिन्दी</option>
+    <option value="ta" className="text-black bg-white">தமிழ்</option>
+    <option value="kn" className="text-black bg-white">ಕನ್ನಡ</option>
+  </select>
+</div>
+
           <span className="hidden sm:inline">{username}</span>
           <button onClick={() => setShowDropdown(!showDropdown)}>
             <MoreVertical size={20} />
@@ -137,13 +162,13 @@ const Dashboard = () => {
                 onClick={handleProfile}
                 className="flex items-center gap-2 px-4 py-2 w-full text-sm hover:bg-gray-100"
               >
-                <User size={16} /> Profile
+                <User size={16} /> {t('profile')}
               </button>
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 px-4 py-2 w-full text-sm text-red-600 hover:bg-gray-100"
               >
-                <LogOut size={16} /> Logout
+                <LogOut size={16} /> {t('logout')}
               </button>
             </div>
           )}
@@ -169,23 +194,21 @@ const Dashboard = () => {
 
         {/* Header Text */}
         <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-2">Environmental Parameters</h2>
-          <p className="text-base sm:text-lg text-white-800">
-            Real-time monitoring of vital environmental conditions and soil parameters
-          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2">{t('dashboard_title')}</h2>
+          <p className="text-base sm:text-lg text-white-800">{t('dashboard_subtitle')}</p>
         </div>
 
         {/* Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-10">
-          <InfoCard icon={<Thermometer />} label="Temperature" value={`${weather?.main.temp ?? '--'} °C`} />
-          <InfoCard icon={<Droplet />} label="Humidity" value={`${weather?.main.humidity ?? '--'} %`} />
-          <InfoCard icon={<Wind />} label="Wind Speed" value={`${weather?.wind.speed ?? '--'} m/s`} />
-          <InfoCard icon={<Sun />} label="Condition" value={weather ? `${weather.main.temp} ${weather.weather[0].main}` : '--'} />
-          <InfoCard icon={<Gauge />} label="Pressure" value={`${weather?.main.pressure ?? '--'} hPa`} />
-          <InfoCard icon={<Leaf />} label="Soil Moisture" value={`${soil?.soilm_0_10cm ?? '--'} %`} />
-          <InfoCard icon={<TrendingDown />} label="Evapotranspiration" value={`${soil?.evapotranspiration ?? '--'} mm/day`} />
-          <InfoCard icon={<CloudRain />} label="Precipitation" value={`${soil?.precip ?? '--'} mm`} />
-          <InfoCard icon={<Cloud />} label="Deep Percolation" value={
+          <InfoCard icon={<Thermometer />} label={t('temperature')} value={`${weather?.main.temp ?? '--'} °C`} />
+          <InfoCard icon={<Droplet />} label={t('humidity')} value={`${weather?.main.humidity ?? '--'} %`} />
+          <InfoCard icon={<Wind />} label={t('wind')} value={`${weather?.wind.speed ?? '--'} m/s`} />
+          <InfoCard icon={<Sun />} label={t('condition')} value={weather ? `${weather.main.temp} ${weather.weather?.[0]?.main ?? ''}` : '--'} />
+          <InfoCard icon={<Gauge />} label={t('pressure')} value={`${weather?.main.pressure ?? '--'} hPa`} />
+          <InfoCard icon={<Leaf />} label={t('soil_moisture')} value={`${soil?.soilm_0_10cm ?? '--'} %`} />
+          <InfoCard icon={<TrendingDown />} label={t('evapotranspiration')} value={`${soil?.evapotranspiration ?? '--'} mm/day`} />
+          <InfoCard icon={<CloudRain />} label={t('precipitation')} value={`${soil?.precip ?? '--'} mm`} />
+          <InfoCard icon={<Cloud />} label={t('deep_percolation')} value={
             soil?.precip && soil?.evapotranspiration
               ? `${(soil.precip - soil.evapotranspiration).toFixed(2)} mm/day`
               : '--'
@@ -195,13 +218,13 @@ const Dashboard = () => {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <SummaryCard
-            title="Weather Analysis"
+            title={t('weather_analysis')}
             highlight={weatherSummary.title}
             description={weatherSummary.desc}
             icon="🌤️"
           />
           <SummaryCard
-            title="Soil Health Status"
+            title={t('soil_status')}
             highlight={soilSummary.title}
             description={soilSummary.desc}
             icon="🧪"
@@ -214,7 +237,7 @@ const Dashboard = () => {
             onClick={() => navigate('/detection/detection')}
             className="bg-white text-green-800 font-serif font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-green-300 hover:bg-green-100"
           >
-            Leaf Detection
+            {t('leaf_detection')}
           </button>
         </div>
       </div>

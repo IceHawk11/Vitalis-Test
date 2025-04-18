@@ -1,49 +1,52 @@
 import React from 'react';
 import { Activity, BarChart2, Clock, Heart, Smartphone, Users } from 'lucide-react';
-
-const features = [
-  {
-    icon: <Activity className="w-10 h-10 text-primary" />,
-    title: "Crop Health Tracking",
-    description: "Monitor plant vitals and health metrics with precision and ease."
-  },
-  {
-    icon: <BarChart2 className="w-10 h-10 text-primary" />,
-    title: "Data Analytics",
-    description: "Gain insights through powerful analytics and personalized reports on crops."
-  },
-  {
-    icon: <Clock className="w-10 h-10 text-primary" />,
-    title: "Real-time Monitoring",
-    description: "Track crop health in real-time with instant notifications and alerts."
-  },
-  {
-    icon: <Heart className="w-10 h-10 text-primary" />,
-    title: "AI-Powered Crop Disease Detection",
-    description: "Access AI-tailored disease detection system."
-  },
-  {
-    icon: <Smartphone className="w-10 h-10 text-primary" />,
-    title: "Mobile Integration",
-    description: "Seamlessly sync across all your devices with our mobile-first approach."
-  },
-  {
-    icon: <Users className="w-10 h-10 text-primary" />,
-    title: "Community Support",
-    description: "Connect with like-minded individuals on our platform."
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 const FeaturesSection = () => {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: <Activity className="w-10 h-10 text-primary" />,
+      title: t("features.crop_health.title"),
+      description: t("features.crop_health.description")
+    },
+    {
+      icon: <BarChart2 className="w-10 h-10 text-primary" />,
+      title: t("features.data_analytics.title"),
+      description: t("features.data_analytics.description")
+    },
+    {
+      icon: <Clock className="w-10 h-10 text-primary" />,
+      title: t("features.realtime_monitoring.title"),
+      description: t("features.realtime_monitoring.description")
+    },
+    {
+      icon: <Heart className="w-10 h-10 text-primary" />,
+      title: t("features.ai_detection.title"),
+      description: t("features.ai_detection.description")
+    },
+    {
+      icon: <Smartphone className="w-10 h-10 text-primary" />,
+      title: t("features.mobile_integration.title"),
+      description: t("features.mobile_integration.description")
+    },
+    {
+      icon: <Users className="w-10 h-10 text-primary" />,
+      title: t("features.community_support.title"),
+      description: t("features.community_support.description")
+    }
+  ];
+
   return (
     <section id="features" className="py-20 bg-muted/50">
       <div className="container px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Comprehensive Features for both Domestic as well as Rural Agriculture
+            {t("features.heading")}
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Discover how Vitalis can transform modern agricultural methods with innovative features.
+            {t("features.subheading")}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
