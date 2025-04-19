@@ -21,6 +21,24 @@
   "features.mobile_integration.description": "Seamlessly sync across all your devices with our mobile-first approach.",
   "features.community_support.title": "Community Support",
   "features.community_support.description": "Connect with like-minded individuals on our platform.",
+   
+  "about.title": "About Vitalis",
+  "about.description": "Vitalis is a full-stack mobile and web application empowering farmers and home gardeners with actionable insights to enhance agricultural productivity through cutting-edge technology.",
+
+  "about.feature1.title": "Intuitive Dashboard",
+  "about.feature1.description": "Real-time insights on crop health parameters such as temperature, humidity, soil moisture along with crucial metrics such as evapotranspiration (ET rate) and deep percolation for analyzing root health.",
+
+  "about.feature2.title": "AI-Powered Crop Disease Detection",
+  "about.feature2.description": "Uses deep learning techniques to detect diseases from leaf images, enabling fast, accurate diagnosis and early intervention.",
+
+  "about.feature3.title": "Cost-Effective & Scalable",
+  "about.feature3.description": "Eliminates lab tests, deployable on smartphones, accessible globally, and ideal for both large-scale farmers and small-scale domestic agriculture.",
+
+  "about.feature4.title": "Sustainability",
+  "about.feature4.description": "Reduces pesticide use through smart farm management systems for automated, tech-driven farming that supports environmental health.",
+
+  "about.mission.title": "Our Mission",
+  "about.mission.description": "To democratize agricultural technology by making advanced farming insights accessible to everyone from commercial farmers to home gardeners, promoting sustainable practices and improving food security worldwide.",
 
    
   "dashboard_title": "Vitalis Dashboard",

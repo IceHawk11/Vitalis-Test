@@ -65,10 +65,10 @@ const Header = () => {
             onChange={handleLanguageChange}
             className="bg-green-600 text-white text-base font-medium rounded-md px-4 py-2 hover:bg-green-500 cursor-pointer transition-colors"
           >
-            <option value="en">🌐 English</option>
-            <option value="hi">🌐 Hindi</option>
-            <option value="ta">🌐 Tamil</option>
-            <option value="kn">🌐 ಕನ್ನಡ</option> 
+            <option value="en"> English</option>
+            <option value="hi">Hindi</option>
+            <option value="ta">Tamil</option>
+            <option value="kn">Kannada</option> 
           </select>
 
           <Button onClick={handleSignupClick}>
@@ -119,10 +119,10 @@ const Header = () => {
                 onChange={handleLanguageChange}
                 className="bg-green-500 text-white text-base font-medium rounded-md px-4 py-2 hover:bg-green-600 cursor-pointer transition-colors"
               >
-                <option value="en">🌐 English</option>
-                <option value="hi">🌐 हिन्दी</option>
-                <option value="ta">🌐 தமிழ்</option>
-                <option value="kn">🌐 ಕನ್ನಡ</option> 
+                <option value="en"> English</option>
+                <option value="hi"> हिन्दी</option>
+                <option value="ta"> தமிழ்</option>
+                <option value="kn"> ಕನ್ನಡ</option> 
               </select>
 
               <Button className="w-full" onClick={handleSignupClick}>

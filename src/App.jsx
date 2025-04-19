@@ -5,6 +5,7 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
 import CTASection from './components/CTASection';
+import About from './components/About';
 import Footer from './components/Footer';
 import PageTransitionWrapper from './components/PageTransitionWrapper';
 import './i18n/i18n';
@@ -23,6 +24,7 @@ function Home() {
         <HeroSection />
         <FeaturesSection />
         <CTASection />
+        <About/>
       </main>
       <Footer />
     </>
