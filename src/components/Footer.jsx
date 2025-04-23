@@ -91,7 +91,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-muted-foreground hover:text-primary"
                 >
-                  Yash Vardhan Chaudhary
+                  Yash Vardhan Choudhary
                   <img
                   src={githubIcon}
                   alt="GitHub"
