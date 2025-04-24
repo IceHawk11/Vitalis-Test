@@ -8,6 +8,9 @@ import {
 import logo from '../assets/icon.png';
 import DashboardFooter from './Dashboard_Footer';
 import { useTranslation } from 'react-i18next';
+const OpenWeathermap_API = process.env.REACT_APP_OpenWeatherMap_API_KEY;
+const Weatherbit_API = process.env.REACT_APP_WeatherbitAg_API_KEY;
+
 
 const cities = [
   { name: 'Delhi', lat: 28.6667, lon: 77.2167 },
@@ -38,12 +41,12 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const weatherRes = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${selectedCity.lat}&lon=${selectedCity.lon}&appid=173a27104f5eaba7e6b71f2b0057d82d&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${selectedCity.lat}&lon=${selectedCity.lon}&appid=${OpenWeathermap_API}&units=metric`
         );
         setWeather(weatherRes.data);
 
         const soilRes = await axios.get(
-          `https://api.weatherbit.io/v2.0/forecast/agweather?lat=${selectedCity.lat}&lon=${selectedCity.lon}&key=7910d509c8c9474ca1a8f64f9bd9153d`
+          `https://api.weatherbit.io/v2.0/forecast/agweather?lat=${selectedCity.lat}&lon=${selectedCity.lon}&key=${Weatherbit_API}`
         );
         const soilData = soilRes.data?.data?.[0];
         setSoil(soilData || null);
