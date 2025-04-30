@@ -68,7 +68,8 @@ const Header = () => {
             <option value="en"> English</option>
             <option value="hi">Hindi</option>
             <option value="ta">Tamil</option>
-            <option value="kn">Kannada</option> 
+            <option value="kn">Kannada</option>
+            <option value="bn">Bengali</option>  
           </select>
 
           <Button onClick={handleSignupClick}>
@@ -78,6 +79,8 @@ const Header = () => {
               ? 'பதிவு செய்யவும்'
               : language==='kn'
               ? 'ನೋಂದಣಿ ಮಾಡಿ'
+              : language==='bn'
+              ? 'সাইন আপ করুন'
               : 'Sign up'}
           </Button>
         </div>
@@ -122,7 +125,8 @@ const Header = () => {
                 <option value="en"> English</option>
                 <option value="hi"> हिन्दी</option>
                 <option value="ta"> தமிழ்</option>
-                <option value="kn"> ಕನ್ನಡ</option> 
+                <option value="kn"> ಕನ್ನಡ</option>
+                <option value="bn"> বাংলা</option> 
               </select>
 
               <Button className="w-full" onClick={handleSignupClick}>

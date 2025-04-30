@@ -6,6 +6,7 @@ import en from './en.json';
 import hi from './hi.json';
 import ta from './ta.json';
 import kn from './kn.json'; 
+import bn from './bn.json';
 
 i18n
   .use(LanguageDetector)
@@ -15,7 +16,8 @@ i18n
       en: { translation: en },
       hi: { translation: hi },
       ta: { translation: ta },
-      kn: { translation: kn }
+      kn: { translation: kn },
+      bn: { translation: bn }
     },
     fallbackLng: 'en',
     debug: false,

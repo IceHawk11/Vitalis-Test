@@ -149,6 +149,7 @@ const Dashboard = () => {
     <option value="hi" className="text-black bg-white">हिन्दी</option>
     <option value="ta" className="text-black bg-white">தமிழ்</option>
     <option value="kn" className="text-black bg-white">ಕನ್ನಡ</option>
+    <option value="bn" className="text-black bg-white">বাংলা</option>
   </select>
 </div>
 

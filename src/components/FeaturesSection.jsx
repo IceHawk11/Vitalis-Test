@@ -7,32 +7,32 @@ const FeaturesSection = () => {
 
   const features = [
     {
-      icon: <Activity className="w-10 h-10 text-primary" />,
+      icon: <Activity className="w-10 h-10 text-primary transition-colors duration-200 group-hover:text-green-600" />,
       title: t("features.crop_health.title"),
       description: t("features.crop_health.description")
     },
     {
-      icon: <BarChart2 className="w-10 h-10 text-primary" />,
+      icon: <BarChart2 className="w-10 h-10 text-primary transition-colors duration-200 group-hover:text-green-600" />,
       title: t("features.data_analytics.title"),
       description: t("features.data_analytics.description")
     },
     {
-      icon: <Clock className="w-10 h-10 text-primary" />,
+      icon: <Clock className="w-10 h-10 text-primary transition-colors duration-200 group-hover:text-green-600" />,
       title: t("features.realtime_monitoring.title"),
       description: t("features.realtime_monitoring.description")
     },
     {
-      icon: <Heart className="w-10 h-10 text-primary" />,
+      icon: <Heart className="w-10 h-10 text-primary transition-colors duration-200 group-hover:text-green-600" />,
       title: t("features.ai_detection.title"),
       description: t("features.ai_detection.description")
     },
     {
-      icon: <Smartphone className="w-10 h-10 text-primary" />,
+      icon: <Smartphone className="w-10 h-10 text-primary transition-colors duration-200 group-hover:text-green-600" />,
       title: t("features.mobile_integration.title"),
       description: t("features.mobile_integration.description")
     },
     {
-      icon: <Users className="w-10 h-10 text-primary" />,
+      icon: <Users className="w-10 h-10 text-primary transition-colors duration-200 group-hover:text-green-600" />,
       title: t("features.community_support.title"),
       description: t("features.community_support.description")
     }
@@ -51,7 +51,10 @@ const FeaturesSection = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="bg-card p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border">
+            <div
+              key={index}
+              className="group bg-card p-6 rounded-lg shadow-sm border transition-all duration-200 hover:bg-green-50 hover:border-green-400 hover:shadow-md"
+            >
               <div className="mb-4">{feature.icon}</div>
               <h3 className="text-xl font-medium mb-2">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>

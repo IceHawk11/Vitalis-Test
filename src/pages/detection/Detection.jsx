@@ -122,6 +122,7 @@ const Detection = () => {
             <option value="hi">हिन्दी</option>
             <option value="ta">தமிழ்</option>
             <option value="kn">ಕನ್ನಡ</option>
+            <option value="bn">বাংলা</option>
           </select>
 
           <div className="flex items-center space-x-2 text-green-700 font-medium relative">
