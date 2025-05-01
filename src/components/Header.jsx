@@ -31,10 +31,19 @@ const Header = () => {
     i18n.changeLanguage(selectedLang); 
   };
 
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between py-4">
-        <div className="flex items-center gap-2">
+        {/* Clickable Logo */}
+        <div 
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => handleNavigation('/')}
+        >
           <motion.img
             src={logo}
             alt="Vitalis Logo"
@@ -52,6 +61,12 @@ const Header = () => {
         <nav className="hidden md:flex items-center gap-6">
           <a href="#features" className="text-sm font-medium hover:text-primary">
             {language === 'hi' ? 'विशेषताएँ' : language === 'ta' ? 'அம்சங்கள்' : language === 'kn' ? 'ವೈಶಿಷ್ಟ್ಯಗಳು': 'Features'}
+          </a>
+          <a 
+            onClick={() => handleNavigation('/marketplace')} 
+            className="text-sm font-medium hover:text-primary cursor-pointer"
+          >
+            {language === 'hi' ? 'मार्केटप्लेस' : language === 'ta' ? 'சந்தை' : language === 'kn' ? 'ಮಾರುಕಟ್ಟೆ' : language === 'bn' ? 'বাজার' : 'Marketplace'}
           </a>
           <a href="#about" className="text-sm font-medium hover:text-primary">
             {language === 'hi' ? 'हमारे बारे में' : language === 'ta' ? 'எங்களை பற்றி' : language==='kn' ? 'ನಮ್ಮ ಬಗ್ಗೆ': 'About'}
@@ -105,6 +120,20 @@ const Header = () => {
                 : 'Features'}
                 
             </a>
+            <a 
+              className="text-lg font-medium hover:text-primary cursor-pointer" 
+              onClick={() => handleNavigation('/marketplace')}
+            >
+              {language === 'hi'
+                ? 'मार्केटप्लेस'
+                : language === 'ta'
+                ? 'சந்தை'
+                : language==='kn'
+                ? 'ಮಾರುಕಟ್ಟೆ'
+                : language==='bn'
+                ? 'বাজার'
+                : 'Marketplace'}
+            </a>
             <a href="#about" className="text-lg font-medium hover:text-primary" onClick={() => setIsOpen(false)}>
               {language === 'hi'
                 ? 'हमारे बारे में'
@@ -134,6 +163,10 @@ const Header = () => {
                   ? 'साइन अप करें'
                   : language === 'ta'
                   ? 'பதிவு செய்யவும்'
+                  : language==='kn'
+                  ? 'ನೋಂದಣಿ ಮಾಡಿ'
+                  : language==='bn'
+                  ? 'সাইন আপ করুন'
                   : 'Sign up'}
               </Button>
             </div>

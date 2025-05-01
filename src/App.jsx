@@ -17,7 +17,7 @@ import Passwd from './login/Passwd';
 import Dashboard from './pages/Dashboard';
 import Signup from './signup/Signup';
 import LanguageSelectionDialog from './components/LanguageSelectionDialog';
-
+import Marketplace from './pages/marketplace/Marketplace';
 
 function Home() {
   return (
@@ -38,8 +38,6 @@ function Home() {
 function App() {
   return (
     <Router>
-       
-      
       <Routes>
         <Route path="/" element={<PageTransitionWrapper><Home /></PageTransitionWrapper>} />
         <Route path="/login/username" element={<PageTransitionWrapper><Username /></PageTransitionWrapper>} />
@@ -47,6 +45,7 @@ function App() {
         <Route path="/detection/detection" element={<PageTransitionWrapper><Detection /></PageTransitionWrapper>} />
         <Route path="/signup" element={<PageTransitionWrapper><Signup /></PageTransitionWrapper>} />
         <Route path="/dashboard" element={<PageTransitionWrapper><Dashboard /></PageTransitionWrapper>} />
+        <Route path="/marketplace" element={<PageTransitionWrapper><Marketplace /></PageTransitionWrapper>} />
       </Routes>
     </Router>
   );

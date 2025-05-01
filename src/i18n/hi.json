@@ -64,6 +64,17 @@
   "weather_summary.variable_title": "परिवर्तनीय परिस्थितियाँ",
   "weather_summary.variable_desc": "अस्थिर मौसम पाया गया। बारीकी से निगरानी करें।",
 
+  "loading_title": "लोड हो रहा है...",
+  "loading_desc": "मौसम की जानकारी प्राप्त की जा रही है।",
+  "warm_rain_title": "गर्म और हल्की बारिश",
+  "warm_rain_desc": "मौसम गर्म है और कुछ बारिश हो रही है।",
+  "very_hot_rainy_title": "बहुत गर्म और बारिश",
+  "very_hot_rainy_desc": "तेज़ गर्मी के साथ बारिश हो रही है।",
+  "subtle_clear_title": "सुबोध मौसम और साफ़ आसमान",
+  "subtle_clear_desc": "हल्का मौसम है, बारिश नहीं हो रही और आसमान साफ़ है।",
+  "variable_title": "बदलता हुआ मौसम",
+  "variable_desc": "परिस्थितियाँ बदल रही हैं। अपडेट रहें।",
+
   "soil_summary.loading_title": "मिट्टी का डेटा लोड हो रहा है...",
   "soil_summary.loading_desc": "नवीनतम मिट्टी की स्थिति प्राप्त की जा रही है।",
   "soil_summary.optimal_title": "उत्तम मिट्टी की स्थिति",

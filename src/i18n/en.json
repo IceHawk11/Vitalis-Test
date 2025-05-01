@@ -4,7 +4,7 @@
   "Vitality for the": "Vitality for the",
   "Digital Age": "Digital Age",
   "Hero Description": "Pioneering a new era in agriculture through breakthrough technology—ushering in seamless, AI-driven plant disease detection and intelligent monitoring at unprecedented scale, empowering farmers worldwide to cultivate healthier crops, maximize yields, and redefine the future of sustainable farming.",
-  "Login": "Login",
+  "Login": "Log in",
   "Learn More": "Learn More",
 
   "features.heading": "Comprehensive Features for both Domestic as well as Rural Agriculture",
@@ -64,6 +64,17 @@
   "weather_summary.mild_desc": "Great weather for most crops today.",
   "weather_summary.variable_title": "Variable Conditions",
   "weather_summary.variable_desc": "Unstable weather detected. Monitor closely.",
+
+  "loading_title": "Loading...",
+  "loading_desc": "Fetching weather information.",
+  "warm_rain_title": "Warm with Light Rain",
+  "warm_rain_desc": "The weather is warm with some rainfall.",
+  "very_hot_rainy_title": "Very Hot and Rainy",
+  "very_hot_rainy_desc": "High temperatures with rainfall present.",
+  "subtle_clear_title": "Subtle Climate and Clear",
+  "subtle_clear_desc": "Mild conditions with no rain and clear skies.",
+  "variable_title": "Variable Weather",
+  "variable_desc": "Conditions are changing. Stay updated.",
 
   "soil_summary.loading_title": "Loading Soil Data...",
   "soil_summary.loading_desc": "Fetching latest soil conditions.",

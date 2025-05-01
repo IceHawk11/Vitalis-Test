@@ -8,9 +8,9 @@ import {
 import logo from '../assets/icon.png';
 import DashboardFooter from './Dashboard_Footer';
 import { useTranslation } from 'react-i18next';
+
 const OpenWeathermap_API = process.env.REACT_APP_OpenWeatherMap_API_KEY;
 const Weatherbit_API = process.env.REACT_APP_WeatherbitAg_API_KEY;
-
 
 const cities = [
   { name: 'Delhi', lat: 28.6667, lon: 77.2167 },
@@ -78,25 +78,40 @@ const Dashboard = () => {
   };
 
   const getWeatherSummary = () => {
-    if (!weather) {
+    if (!weather || !soil) {
       return {
-        title: t('weather_summary.loading_title'),
-        desc: t('weather_summary.loading_desc')
+        title: t('loading_title'),
+        desc: t('loading_desc')
       };
     }
-    const temp = weather.main.temp;
-    const humidity = weather.main.humidity;
-    const wind = weather.wind.speed;
 
-    if (temp >= 20 && temp <= 30 && humidity <= 70 && wind < 15) {
+    const temp = weather.main.temp;
+    const precip = soil.precip;
+
+    if (temp > 30 && temp < 35 && precip > 1) {
       return {
-        title: t('weather_summary.mild_title'),
-        desc: t('weather_summary.mild_desc')
+        title: t('warm_rain_title'),
+        desc: t('warm_rain_desc')
       };
     }
+
+    if (temp > 35 && precip > 1) {
+      return {
+        title: t('very_hot_rainy_title'),
+        desc: t('very_hot_rainy_desc')
+      };
+    }
+
+    if (temp < 30 && precip === 0) {
+      return {
+        title: t('subtle_clear_title'),
+        desc: t('subtle_clear_desc')
+      };
+    }
+
     return {
-      title: t('weather_summary.variable_title'),
-      desc: t('weather_summary.variable_desc')
+      title: t('variable_title'),
+      desc: t('variable_desc')
     };
   };
 
@@ -126,8 +141,68 @@ const Dashboard = () => {
   const weatherSummary = getWeatherSummary();
   const soilSummary = getSoilSummary();
 
+  const parameterCards = [
+    {
+      icon: (
+        <div className="flex items-center justify-center w-10 h-10 bg-red-500 bg-opacity-20 rounded-full">
+          <Thermometer className="text-red-600" size={26} strokeWidth={2.5} />
+        </div>
+      ),
+      label: t('temperature'),
+      value: `${weather?.main.temp ?? '--'} °C`,
+      highlight: true
+    },
+    {
+      icon: (
+        <div className="flex items-center justify-center w-10 h-10 bg-blue-500 bg-opacity-20 rounded-full">
+          <Leaf className="text-blue-600" size={26} strokeWidth={2.5} />
+        </div>
+      ),
+      label: t('soil_moisture'),
+      value: `${soil?.soilm_0_10cm ?? '--'} %`,
+      highlight: true
+    },
+    {
+      icon: <Droplet className="text-green-600" size={24} />,
+      label: t('humidity'),
+      value: `${weather?.main.humidity ?? '--'} %`
+    },
+    {
+      icon: <Wind className="text-green-600" size={24} />,
+      label: t('wind'),
+      value: `${weather?.wind.speed ?? '--'} m/s`
+    },
+    {
+      icon: <Sun className="text-green-600" size={24} />,
+      label: t('condition'),
+      value: weather ? `${weather.weather?.[0]?.main ?? ''}` : '--'
+    },
+    {
+      icon: <Gauge className="text-green-600" size={24} />,
+      label: t('pressure'),
+      value: `${weather?.main.pressure ?? '--'} hPa`
+    },
+    {
+      icon: <TrendingDown className="text-green-600" size={24} />,
+      label: t('evapotranspiration'),
+      value: `${soil?.evapotranspiration ?? '--'} mm/day`
+    },
+    {
+      icon: <CloudRain className="text-green-600" size={24} />,
+      label: t('precipitation'),
+      value: `${soil?.precip ?? '--'} mm`
+    },
+    {
+      icon: <Cloud className="text-green-600" size={24} />,
+      label: t('deep_percolation'),
+      value: soil?.precip && soil?.evapotranspiration
+        ? `${(soil.precip - soil.evapotranspiration).toFixed(2)} mm/day`
+        : '--'
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-green-700 text-gray-1000 flex flex-col justify-between">
+    <div className="min-h-screen bg-white text-gray-800 flex flex-col justify-between">
       {/* Header */}
       <div className="bg-white shadow-sm px-4 sm:px-6 py-3 flex justify-between items-center border-b border-green-200 relative">
         <div className="flex items-center space-x-2">
@@ -139,20 +214,19 @@ const Dashboard = () => {
           <span className="text-lg sm:text-xl font-semibold text-green-700">Vitalis</span>
         </div>
         <div className="flex items-center space-x-4 text-green-700 font-medium relative">
-        <div className="relative">
-  <select
-    value={i18n.language}
-    onChange={(e) => i18n.changeLanguage(e.target.value)}
-    className="bg-green-600 text-white font-medium text-sm px-3 py-1 rounded-md shadow-sm border-none focus:outline-none focus:ring-2 focus:ring-green-400"
-  >
-    <option value="en" className="text-black bg-white">English</option>
-    <option value="hi" className="text-black bg-white">हिन्दी</option>
-    <option value="ta" className="text-black bg-white">தமிழ்</option>
-    <option value="kn" className="text-black bg-white">ಕನ್ನಡ</option>
-    <option value="bn" className="text-black bg-white">বাংলা</option>
-  </select>
-</div>
-
+          <div className="relative">
+            <select
+              value={i18n.language}
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              className="bg-green-600 text-white font-medium text-sm px-3 py-1 rounded-md shadow-sm border-none focus:outline-none focus:ring-2 focus:ring-green-400"
+            >
+              <option value="en" className="text-black bg-white">English</option>
+              <option value="hi" className="text-black bg-white">हिन्दी</option>
+              <option value="ta" className="text-black bg-white">தமிழ்</option>
+              <option value="kn" className="text-black bg-white">ಕನ್ನಡ</option>
+              <option value="bn" className="text-black bg-white">বাংলা</option>
+            </select>
+          </div>
           <span className="hidden sm:inline">{username}</span>
           <button onClick={() => setShowDropdown(!showDropdown)}>
             <MoreVertical size={20} />
@@ -184,7 +258,7 @@ const Dashboard = () => {
         {/* City Selector */}
         <div className="mb-6 flex justify-center">
           <select
-            className="border px-4 py-2 rounded-md shadow-sm w-full sm:w-auto"
+            className="border border-green-300 px-4 py-2 rounded-md shadow-sm w-full sm:w-auto text-green-700 bg-white"
             value={selectedCity.name}
             onChange={(e) =>
               setSelectedCity(cities.find(city => city.name === e.target.value))
@@ -198,25 +272,20 @@ const Dashboard = () => {
 
         {/* Header Text */}
         <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-2">{t('dashboard_title')}</h2>
-          <p className="text-base sm:text-lg text-white-800">{t('dashboard_subtitle')}</p>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-green-700">{t('dashboard_title')}</h2>
+          <p className="text-base sm:text-lg text-green-600">{t('dashboard_subtitle')}</p>
         </div>
 
         {/* Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-10">
-          <InfoCard icon={<Thermometer />} label={t('temperature')} value={`${weather?.main.temp ?? '--'} °C`} />
-          <InfoCard icon={<Droplet />} label={t('humidity')} value={`${weather?.main.humidity ?? '--'} %`} />
-          <InfoCard icon={<Wind />} label={t('wind')} value={`${weather?.wind.speed ?? '--'} m/s`} />
-          <InfoCard icon={<Sun />} label={t('condition')} value={weather ? `${weather.main.temp} ${weather.weather?.[0]?.main ?? ''}` : '--'} />
-          <InfoCard icon={<Gauge />} label={t('pressure')} value={`${weather?.main.pressure ?? '--'} hPa`} />
-          <InfoCard icon={<Leaf />} label={t('soil_moisture')} value={`${soil?.soilm_0_10cm ?? '--'} %`} />
-          <InfoCard icon={<TrendingDown />} label={t('evapotranspiration')} value={`${soil?.evapotranspiration ?? '--'} mm/day`} />
-          <InfoCard icon={<CloudRain />} label={t('precipitation')} value={`${soil?.precip ?? '--'} mm`} />
-          <InfoCard icon={<Cloud />} label={t('deep_percolation')} value={
-            soil?.precip && soil?.evapotranspiration
-              ? `${(soil.precip - soil.evapotranspiration).toFixed(2)} mm/day`
-              : '--'
-          } />
+          {parameterCards.map((card, index) => (
+            <InfoCard
+              key={index}
+              icon={card.icon}
+              label={card.label}
+              value={card.value}
+            />
+          ))}
         </div>
 
         {/* Summary Cards */}
@@ -239,7 +308,7 @@ const Dashboard = () => {
         <div className="flex justify-center mt-10">
           <button
             onClick={() => navigate('/detection/detection')}
-            className="bg-white text-green-800 font-serif font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-green-300 hover:bg-green-100"
+            className="bg-green-600 text-white font-serif font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:bg-green-700"
           >
             {t('leaf_detection')}
           </button>
@@ -254,19 +323,19 @@ const Dashboard = () => {
 
 // InfoCard Component
 const InfoCard = ({ icon, label, value }) => (
-  <div className="bg-white p-4 sm:p-5 rounded-xl shadow-md flex flex-col gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-green-300 hover:bg-green-100">
-    <div className="flex items-center gap-3 text-green-600 text-base sm:text-lg font-semibold">
+  <div className="bg-green-100 p-4 sm:p-5 rounded-xl shadow-md flex flex-col gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-green-300 hover:bg-green-200 border border-green-300">
+    <div className="flex items-center gap-3 text-green-700 text-base sm:text-lg font-semibold">
       {icon}
       <span>{label}</span>
     </div>
-    <p className="text-lg sm:text-xl font-bold">{value}</p>
+    <p className="text-lg sm:text-xl font-bold text-green-800">{value}</p>
   </div>
 );
 
 // SummaryCard Component
 const SummaryCard = ({ title, highlight, description, icon }) => (
-  <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-green-300 hover:bg-green-100">
-    <div className="flex items-center gap-3 sm:gap-4 mb-2 text-base sm:text-xl font-semibold">
+  <div className="bg-green-50 p-4 sm:p-6 rounded-xl shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-green-300 hover:bg-green-100 border border-green-200">
+    <div className="flex items-center gap-3 sm:gap-4 mb-2 text-base sm:text-xl font-semibold text-green-800">
       <span className="text-2xl sm:text-3xl">{icon}</span>
       {title}
     </div>

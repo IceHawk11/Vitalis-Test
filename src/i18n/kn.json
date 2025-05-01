@@ -62,6 +62,17 @@
   "weather_summary.variable_title": "ಅಸ್ಥಿರ ಪರಿಸ್ಥಿತಿಗಳು",
   "weather_summary.variable_desc": "ಅಸ್ಥಿರ ಹವಾಮಾನ ಕಂಡುಬಂದಿದೆ. ಗಮನದಿಂದ ಗಮನಿಸಿ.",
 
+  "loading_title": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+  "loading_desc": "ಹವಾಮಾನ ಮಾಹಿತಿ ಪಡೆಯುತ್ತಿದೆ.",
+  "warm_rain_title": "ಉಷ್ಣ ಮತ್ತು ತುಸು ಮಳೆಯು",
+  "warm_rain_desc": "ಹವಾಮಾನ ಉಷ್ಣವಾಗಿದೆ ಮತ್ತು ಸ್ವಲ್ಪ ಮಳೆಯಾಗಿದೆ.",
+  "very_hot_rainy_title": "ತೀವ್ರವಾದ ಉಷ್ಣತೆ ಮತ್ತು ಮಳೆಯು",
+  "very_hot_rainy_desc": "ಹೆಚ್ಚು ತಾಪಮಾನದಲ್ಲಿ ಮಳೆಯು ಕಾಣುತ್ತಿದೆ.",
+  "subtle_clear_title": "ಸಾಧಾರಣ ಮತ್ತು ಸ್ಪಷ್ಟ ವಾತಾವರಣ",
+  "subtle_clear_desc": "ನಮ್ರವಾದ ಪರಿಸ್ಥಿತಿ, ಮಳೆಯಿಲ್ಲದೆ ಸ್ಪಷ್ಟ ಆಕಾಶ.",
+  "variable_title": "ಬದಲಾವಣೆಯ ಹವಾಮಾನ",
+  "variable_desc": "ಪರಿಸ್ಥಿತಿಗಳು ಬದಲಾಗುತ್ತಿವೆ. ನವೀಕರಿಸಿ.",
+
   "soil_summary.loading_title": "ಮಣ್ಣಿನ ಡೇಟಾ ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
   "soil_summary.loading_desc": "ಇತ್ತೀಚಿನ ಮಣ್ಣಿನ ಸ್ಥಿತಿಗಳನ್ನು ಪಡೆಯಲಾಗುತ್ತಿದೆ.",
   "soil_summary.optimal_title": "ಅತ್ಯುತ್ತಮ ಮಣ್ಣಿನ ಪರಿಸ್ಥಿತಿಗಳು",

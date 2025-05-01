@@ -62,6 +62,17 @@
     "weather_summary.mild_desc": "আজকের আবহাওয়া অধিকাংশ ফসলের জন্য অনুকূল।",
     "weather_summary.variable_title": "পরিবর্তনশীল অবস্থা",
     "weather_summary.variable_desc": "অস্থির আবহাওয়া সনাক্ত হয়েছে। সতর্ক থাকুন।",
+
+    "loading_title": "লোড হচ্ছে...",
+    "loading_desc": "আবহাওয়ার তথ্য আনা হচ্ছে।",
+    "warm_rain_title": "গরম এবং হালকা বৃষ্টি",
+    "warm_rain_desc": "আবহাওয়া গরম এবং কিছুটা বৃষ্টি হচ্ছে।",
+    "very_hot_rainy_title": "খুব গরম এবং বৃষ্টিপূর্ণ",
+    "very_hot_rainy_desc": "উচ্চ তাপমাত্রা এবং বৃষ্টি দেখা যাচ্ছে।",
+    "subtle_clear_title": "সুবোধ আবহাওয়া এবং পরিষ্কার আকাশ",
+    "subtle_clear_desc": "হালকা আবহাওয়া, বৃষ্টি নেই এবং আকাশ পরিষ্কার।",
+    "variable_title": "পরিবর্তনশীল আবহাওয়া",
+    "variable_desc": "পরিস্থিতি পরিবর্তিত হচ্ছে। আপডেট থাকুন।",
   
     "soil_summary.loading_title": "মাটির তথ্য লোড হচ্ছে...",
     "soil_summary.loading_desc": "সর্বশেষ মাটির অবস্থা আনছে।",
