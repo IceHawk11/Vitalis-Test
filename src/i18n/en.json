@@ -40,7 +40,42 @@
   "about.mission.title": "Our Mission",
   "about.mission.description": "To democratize agricultural technology by making advanced farming insights accessible to everyone from commercial farmers to home gardeners, promoting sustainable practices and improving food security worldwide.",
 
-   
+  "welcome": "Welcome Back",
+  "prompt": "Login with either Username or Mobile Number",
+  "username": "Username",
+  "mobile": "Mobile Number",
+  "or": "OR",
+  "next": "Next",
+  "invalid_username": "Invalid username",
+  "invalid_mobile": "Enter a valid 10-digit mobile number",
+  "enter_username_or_mobile": "Please enter either Username or Mobile Number",
+  "no_account": "Create New Account?",
+  "signup": "Sign Up",
+
+  "enter_password": "Enter Password",
+  "incorrect_password": "Incorrect Password",
+  
+
+  "heading": "Sign Up",
+  "subheading": "Create your Vitalis account",
+  "role": "Role",
+  "select_role": "Select your role",
+  
+    "cultivator": "Cultivator",
+    "agronomist": "Agronomist",
+    "homesteader": "Homesteader",
+  "username": "Username",
+  "mobile": "Mobile Number",
+  "password": "Password",
+  "button": "Sign Up",
+  "have_account": "Already have an account?",
+  "login": "Log in",
+  "error_mobile": "Mobile number must be 10 digits.",
+  "error_password": "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+
+
+
+
   "dashboard_title": "Vitalis Dashboard",
   "dashboard_subtitle": "Real-time Agricultural Monitoring",
   "temperature": "Temperature",
@@ -83,7 +118,10 @@
   "soil_summary.attention_title": "Soil Needs Attention",
   "soil_summary.attention_desc": "Check irrigation and soil levels.",
 
-  "detectionTitle": "Tomato Leaf Disease Detection",
+  "tomato_leaf_detection": "Tomato Leaf Disease Detection",
+  "potato_leaf_detection": "Potato Leaf Disease Detection",
+
+
   "uploadImage": "Upload Image",
   "analyze": "Analyze",
   "analyzing": "Analyzing image...",
@@ -104,5 +142,35 @@
   "symptom9": "Large dark blotches on leaves",
   "symptom10": "Water-soaked lesions",
   "symptom11": "Rapid leaf wilting",
-  "symptom12": "Entire plant may collapse"
+  "symptom12": "Entire plant may collapse",
+
+  "cures": "Preventive Measures",
+  "cures.earlyBlight.0": "Use fungicides containing chlorothalonil or mancozeb.",
+  "cures.earlyBlight.1": "Remove and destroy infected leaves.",
+  "cures.earlyBlight.2": "Ensure proper spacing to reduce humidity.",
+
+  "cures.moderateBlight.0": "Apply copper-based fungicide weekly.",
+  "cures.moderateBlight.1": "Avoid overhead watering to reduce leaf wetness.",
+  "cures.moderateBlight.2": "Prune lower leaves to improve airflow.",
+
+  "cures.lateBlight.0": "Use systemic fungicide immediately.",
+  "cures.lateBlight.1": "Remove infected plants to prevent spread.",
+  "cures.lateBlight.2": "Disinfect garden tools regularly.",
+
+"cure1": "Apply Mancozeb or Chlorothalonil fungicides as per agricultural guidelines.",
+"cure2": "Avoid overhead irrigation to reduce leaf wetness.",
+"cure3": "Ensure proper crop rotation and remove infected debris.",
+
+"cure4": "Use fungicides like Azoxystrobin or Copper-based sprays.",
+"cure5": "Maintain proper spacing and airflow between plants.",
+"cure6": "Irrigate early in the day to allow foliage to dry.",
+
+"cure7": "Apply systemic fungicides such as Metalaxyl or Ridomil Gold.",
+"cure8": "Destroy infected plants and avoid planting in the same area.",
+"cure9": "Monitor closely during cool and wet weather conditions."
+
+
+
+
+
 }

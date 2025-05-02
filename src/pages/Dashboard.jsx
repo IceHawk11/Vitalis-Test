@@ -1,3 +1,4 @@
+// Dashboard.jsx
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -304,13 +305,19 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Leaf Detection Button */}
-        <div className="flex justify-center mt-10">
+        {/* Leaf Detection Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
           <button
             onClick={() => navigate('/detection/detection')}
             className="bg-green-600 text-white font-serif font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:bg-green-700"
           >
-            {t('leaf_detection')}
+            {t('tomato_leaf_detection')}
+          </button>
+          <button
+            onClick={() => navigate('/detection/potato')}
+            className="bg-green-600 text-white font-serif font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:bg-green-700"
+          >
+            {t('potato_leaf_detection')}
           </button>
         </div>
       </div>

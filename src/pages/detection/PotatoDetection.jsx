@@ -6,7 +6,7 @@ import logo from '../../assets/icon.png';
 import DashboardFooter from '../../pages/Dashboard_Footer';
 import { useTranslation } from 'react-i18next';
 
-const Detection = () => {
+const PotatoDetection = () => {
   const [username, setUsername] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -79,37 +79,22 @@ const Detection = () => {
         severity: t('moderateSeverity'),
         confidence: '75% confidence',
         disease: 'Moderate Blight',
-        color: 'text-yellow-600',
         symptoms: [t('symptom1'), t('symptom2'), t('symptom3'), t('symptom4')],
-        cures: [
-          t('cures.moderateBlight.0'),
-          t('cures.moderateBlight.1'),
-          t('cures.moderateBlight.2'),
-        ],
+        cures: [t('cure1'), t('cure2'), t('cure3')],
       },
       {
         severity: t('mediumSeverity'),
         confidence: '85% confidence',
         disease: 'Early Blight',
-        color: 'text-green-600',
         symptoms: [t('symptom5'), t('symptom6'), t('symptom7'), t('symptom8')],
-        cures: [
-          t('cures.earlyBlight.0'),
-          t('cures.earlyBlight.1'),
-          t('cures.earlyBlight.2'),
-        ],
+        cures: [t('cure4'), t('cure5'), t('cure6')],
       },
       {
         severity: t('highSeverity'),
         confidence: '90% confidence',
         disease: 'Late Blight',
-        color: 'text-red-600',
         symptoms: [t('symptom9'), t('symptom10'), t('symptom11'), t('symptom12')],
-        cures: [
-          t('cures.lateBlight.0'),
-          t('cures.lateBlight.1'),
-          t('cures.lateBlight.2'),
-        ],
+        cures: [t('cure7'), t('cure8'), t('cure9')],
       },
     ];
     return diseases[imageCount];
@@ -130,10 +115,11 @@ const Detection = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          {/* Language Switch */}
           <select
             value={i18n.language}
             onChange={(e) => changeLanguage(e.target.value)}
-            className="bg-green-600 text-white text-sm font-medium px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="bg-green-600 text-white text-sm font-medium px-3 py-1 rounded focus:outline-none"
           >
             <option value="en">English</option>
             <option value="hi">हिन्दी</option>
@@ -142,6 +128,7 @@ const Detection = () => {
             <option value="bn">বাংলা</option>
           </select>
 
+          {/* Profile Dropdown */}
           <div className="flex items-center space-x-2 text-green-700 font-medium relative">
             <span className="hidden sm:inline">{username}</span>
             <button onClick={() => setShowDropdown(!showDropdown)}>
@@ -173,11 +160,11 @@ const Detection = () => {
       {/* Body */}
       <div className="flex flex-1 justify-center py-6 px-4 sm:px-6">
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 max-w-4xl w-full">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-6 text-center">
-            {t('tomato_leaf_detection')}
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">
+            {t('potato_leaf_detection')}
           </h1>
 
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-6 relative">
             {selectedImage ? (
               <div className="relative w-full max-w-xs">
                 <img
@@ -201,7 +188,7 @@ const Detection = () => {
 
           <div className="flex justify-center mb-6">
             <label htmlFor="imageUpload">
-              <span className="bg-green-600 text-white px-5 py-2 rounded-md font-medium cursor-pointer hover:bg-green-700 text-sm sm:text-base">
+              <span className="bg-green-600 text-white px-5 py-2 rounded-md font-medium cursor-pointer hover:bg-green-700">
                 {t('uploadImage')}
               </span>
               <input
@@ -233,46 +220,44 @@ const Detection = () => {
                     key={i}
                     className="w-3 h-3 bg-blue-600 rounded-full"
                     animate={{ y: [0, -8, 0] }}
-                    transition={{
-                      duration: 0.6,
-                      repeat: Infinity,
-                      delay: i * 0.2,
-                    }}
+                    transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.2 }}
                   />
                 ))}
               </div>
-              <p className="mt-3 text-blue-600 font-medium text-sm sm:text-base">
-                {t('analyzing')}
-              </p>
+              <p className="mt-3 text-blue-600 font-medium">{t('analyzing')}</p>
             </div>
           )}
 
           {analysisComplete && (
-            <div className="bg-gray-50 border-l-4 p-4 sm:p-6 shadow text-sm sm:text-base border-red-500 rounded-md">
-              <div className="flex justify-between items-center mb-2">
-                <span className={`font-semibold ${getDiseaseInfo().color}`}>
-                  {getDiseaseInfo().severity}
-                </span>
-                <span className="text-xs text-gray-500">{getDiseaseInfo().confidence}</span>
+            <div className="bg-gray-50 border-l-4 border-red-500 rounded-md p-4 shadow text-sm sm:text-base space-y-4">
+              <div>
+                <div className="flex justify-between mb-1">
+                  <span className="text-red-600 font-semibold">{getDiseaseInfo().severity}</span>
+                  <span className="text-xs text-gray-500">{getDiseaseInfo().confidence}</span>
+                </div>
+                <p className="font-semibold text-gray-700">
+                  {t('detectedDisease')}{' '}
+                  <span className="text-red-600">{getDiseaseInfo().disease}</span>
+                </p>
               </div>
-              <p className="font-semibold text-gray-700 mb-2">
-                {t('detectedDisease')}{' '}
-                <span className={getDiseaseInfo().color}>{getDiseaseInfo().disease}</span>
-              </p>
-              <p className="font-medium text-gray-700 mb-1">{t('symptoms')}:</p>
-              <ul className="list-disc list-inside text-gray-600 space-y-1 mb-3">
-                {getDiseaseInfo().symptoms.map((symptom, idx) => (
-                  <li key={idx}>{symptom}</li>
-                ))}
-              </ul>
-              <p className="font-medium text-gray-700 mb-1">{t('cures')}:</p>
-              <ul className="list-disc list-inside space-y-1 text-gray-700">
-                {getDiseaseInfo().cures.map((cure, idx) => (
-                  <li key={idx} className={getDiseaseInfo().color}>
-                    {cure}
-                  </li>
-                ))}
-              </ul>
+
+              <div>
+                <p className="font-medium text-gray-700 mb-1">{t('symptoms')}:</p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1">
+                  {getDiseaseInfo().symptoms.map((symptom, idx) => (
+                    <li key={idx}>{symptom}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <p className="font-medium text-gray-700 mb-1">{t('cures')}:</p>
+                <ul className="list-disc list-inside text-green-700 space-y-1">
+                  {getDiseaseInfo().cures.map((cure, idx) => (
+                    <li key={idx}>{cure}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           )}
         </div>
@@ -284,4 +269,4 @@ const Detection = () => {
   );
 };
 
-export default Detection;
+export default PotatoDetection;
