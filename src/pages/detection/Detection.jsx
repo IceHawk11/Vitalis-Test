@@ -13,9 +13,22 @@ const Detection = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisComplete, setAnalysisComplete] = useState(false);
   const [imageCount, setImageCount] = useState(0);
+  const [useFallback, setUseFallback] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+
+  // Load voices when the component mounts
+  useEffect(() => {
+    // Chrome needs this workaround to load voices
+    if (window.speechSynthesis) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices(); // This triggers voice loading
+      };
+      // Initial call to get voices
+      window.speechSynthesis.getVoices();
+    }
+  }, []);
 
   useEffect(() => {
     const user = localStorage.getItem('username');
@@ -71,6 +84,82 @@ const Detection = () => {
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
+  };
+
+  const speakCures = () => {
+    try {
+      const cures = getDiseaseInfo().cures.join('. ');
+      const language = i18n.language;
+      
+      // Check if browser supports speech synthesis
+      if (!window.speechSynthesis) {
+        console.error('Speech synthesis not supported in this browser');
+        return;
+      }
+      
+      // Map language codes to BCP 47 language tags that are widely supported
+      const languageMap = {
+        'en': 'en-US',
+        'hi': 'hi-IN',
+        'ta': 'ta-IN',
+        'kn': 'kn-IN',
+        'bn': 'bn-IN',
+      };
+      
+      // Check if we should use English as fallback
+      const speechLang = useFallback ? 'en-US' : (languageMap[language] || 'en-US');
+      
+      // Get available voices
+      const voices = window.speechSynthesis.getVoices();
+      console.log("Available voices:", voices.map(v => `${v.name} (${v.lang})`));
+      
+      // Create utterance with the text to be spoken
+      const speech = new SpeechSynthesisUtterance(cures);
+      speech.lang = speechLang;
+      speech.rate = 0.9;
+      speech.pitch = 1;
+      
+      // Flag to check if we found a matching voice
+      let foundMatchingVoice = false;
+      
+      // Try to find a voice for the specific language
+      if (voices.length > 0 && !useFallback) {
+        // Find voice that matches language exactly or starts with language code
+        const voiceForLanguage = voices.find(voice => 
+          voice.lang === speechLang || 
+          voice.lang.startsWith(speechLang.split('-')[0])
+        );
+        
+        if (voiceForLanguage) {
+          speech.voice = voiceForLanguage;
+          foundMatchingVoice = true;
+          console.log(`Found matching voice: ${voiceForLanguage.name} (${voiceForLanguage.lang})`);
+        } else {
+          console.log(`No matching voice found for ${speechLang}`);
+        }
+      }
+      
+      // Cancel any ongoing speech before starting new one
+      window.speechSynthesis.cancel();
+      
+      // Set up event handlers to detect issues
+      speech.onerror = (event) => {
+        console.error('Speech synthesis error:', event);
+      };
+      
+      // Start speaking
+      window.speechSynthesis.speak(speech);
+      
+      console.log(`Speaking in ${speech.lang} with voice: ${speech.voice?.name || 'default'}`);
+    } catch (error) {
+      console.error('Error in speech synthesis:', error);
+    }
+  };
+
+  const stopSpeaking = () => {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
   };
 
   const getDiseaseInfo = () => {
@@ -266,13 +355,31 @@ const Detection = () => {
                 ))}
               </ul>
               <p className="font-medium text-gray-700 mb-1">{t('cures')}:</p>
-              <ul className="list-disc list-inside space-y-1 text-gray-700">
+              <ul className="list-disc list-inside space-y-1 text-gray-700 mb-4">
                 {getDiseaseInfo().cures.map((cure, idx) => (
                   <li key={idx} className={getDiseaseInfo().color}>
                     {cure}
                   </li>
                 ))}
               </ul>
+              
+              <div className="flex flex-wrap gap-2 mt-2">
+                <button
+                  onClick={speakCures}
+                  className="bg-green-600 text-white px-4 py-2 rounded-md font-medium text-sm hover:bg-green-700"
+                >
+                  {t('readCures')}
+                </button>
+                
+                <button
+                  onClick={stopSpeaking}
+                  className="bg-red-600 text-white px-4 py-2 rounded-md font-medium text-sm hover:bg-red-700"
+                >
+                  {t('stop')}
+                </button>
+    
+                
+              </div>
             </div>
           )}
         </div>

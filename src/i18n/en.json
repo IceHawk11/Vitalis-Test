@@ -167,10 +167,10 @@
 
 "cure7": "Apply systemic fungicides such as Metalaxyl or Ridomil Gold.",
 "cure8": "Destroy infected plants and avoid planting in the same area.",
-"cure9": "Monitor closely during cool and wet weather conditions."
+"cure9": "Monitor closely during cool and wet weather conditions.",
 
-
-
+"readCures": "Read Cures",
+"stop":"Stop"
 
 
 }

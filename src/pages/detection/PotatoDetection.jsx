@@ -100,6 +100,60 @@ const PotatoDetection = () => {
     return diseases[imageCount];
   };
 
+  const speakCures = () => {
+    try {
+      const curesText = getDiseaseInfo().cures.join(', ');
+      const language = i18n.language;
+      
+      // Check if browser supports speech synthesis
+      if (!window.speechSynthesis) {
+        console.error('Speech synthesis not supported in this browser');
+        return;
+      }
+      
+      // Map language codes to BCP 47 language tags that are widely supported
+      const languageMap = {
+        'en': 'en-US',
+        'hi': 'hi-IN',
+        'ta': 'ta-IN',
+        'kn': 'kn-IN',
+        'bn': 'bn-IN', // Changed from bn-BD to bn-IN for better support
+      };
+
+      const speech = new SpeechSynthesisUtterance(curesText);
+      speech.lang = languageMap[language] || 'en-US';
+      speech.rate = 0.9; // Slightly slower for better clarity
+      speech.pitch = 1;
+      
+      // Get available voices
+      const voices = window.speechSynthesis.getVoices();
+      
+      // Try to find a voice for the specific language
+      if (voices.length > 0) {
+        // Find voice that supports the language
+        const voiceForLanguage = voices.find(voice => 
+          voice.lang.startsWith(language) || 
+          voice.lang.startsWith(languageMap[language].split('-')[0])
+        );
+        
+        if (voiceForLanguage) {
+          speech.voice = voiceForLanguage;
+        }
+      }
+      
+      // Cancel any ongoing speech before starting new one
+      window.speechSynthesis.cancel();
+      
+      // Start speaking
+      window.speechSynthesis.speak(speech);
+      
+      // Debugging
+      console.log(`Speaking in ${speech.lang} with voice: ${speech.voice?.name || 'default'}`);
+    } catch (error) {
+      console.error('Error in speech synthesis:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-600 to-green-600 text-gray-800 flex flex-col justify-between">
       {/* Header */}
@@ -258,12 +312,28 @@ const PotatoDetection = () => {
                   ))}
                 </ul>
               </div>
+
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  onClick={speakCures}
+                  className="bg-green-600 text-white px-5 py-2 rounded-md font-medium hover:bg-green-700"
+                >
+                  {t('readCures')}
+                </button>
+                
+                {/* Fallback text display for unsupported browsers/languages */}
+                <button
+                  onClick={() => window.speechSynthesis?.cancel()}
+                  className="bg-red-500 text-white px-5 py-2 rounded-md font-medium hover:bg-red-600"
+                >
+                  {t('stop')}
+                </button>
+              </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Footer */}
       <DashboardFooter />
     </div>
   );
