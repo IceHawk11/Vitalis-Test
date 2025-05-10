@@ -7,7 +7,7 @@
 
 ---
 
-### Home
+## Home
 ![Home](https://raw.githubusercontent.com/IceHawk11/Vitalis-Test/refs/heads/master/shots/Home.JPG)
 
 ## 🚀 Getting Started (Local Setup)
